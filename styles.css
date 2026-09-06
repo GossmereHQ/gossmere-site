@@ -57,9 +57,29 @@ main, footer { width: min(var(--max), calc(100% - 2.5rem)); margin: 0 auto; }
   padding: 6rem 0 5rem;
   max-width: 1080px;
 }
-.hero-brand { display: flex; align-items: center; gap: 1.4rem; margin-bottom: 1.6rem; }
-.hero-logo { width: clamp(92px, 10vw, 138px); height: auto; border-radius: 22px; box-shadow: 0 24px 70px rgba(16, 102, 220, .15); }
-.hero-wordmark { font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 700; letter-spacing: .42em; }
+.hero-brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .65rem;
+  width: fit-content;
+  margin-bottom: 1.8rem;
+}
+.hero-logo {
+  width: clamp(128px, 15vw, 190px);
+  height: auto;
+  display: block;
+  border-radius: 22px;
+  box-shadow: 0 24px 70px rgba(16, 102, 220, .12);
+}
+.hero-wordmark {
+  margin-left: .08em;
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: .38em;
+  line-height: 1;
+}
 .eyebrow, .section-label {
   margin: 0 0 1rem;
   color: var(--cyan);
@@ -188,8 +208,9 @@ footer {
   main, footer { width: min(100% - 1.5rem, var(--max)); }
   .site-header { padding-left: .9rem; padding-right: .9rem; }
   .brand-lockup span { font-size: .8rem; }
-  .hero-brand { gap: .9rem; }
-  .hero-wordmark { font-size: 1.05rem; letter-spacing: .27em; }
+  .hero-brand { gap: .55rem; }
+  .hero-logo { width: 138px; }
+  .hero-wordmark { font-size: 1rem; letter-spacing: .30em; }
   .product-row { grid-template-columns: 1fr; }
   .service-list > div { grid-template-columns: 1fr; gap: .45rem; }
 }
