@@ -1,3 +1,4 @@
+// Gossmere commercial tooling v1 — validated by GitHub runner
 (() => {
   'use strict';
 
