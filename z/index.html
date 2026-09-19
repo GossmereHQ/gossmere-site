@@ -8,7 +8,7 @@
   <style>
     :root{color-scheme:dark;--bg:#08090a;--panel:#121316;--text:#f5f5f3;--muted:#9b9ca1;--accent:#ff8400;--line:#292b30}
     *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
-    main{max-width:720px;margin:0 auto;padding:52px 22px 64px}.brand{font-size:12px;letter-spacing:.18em;font-weight:700;color:#fff}.product{color:var(--accent)}
+    main{max-width:720px;margin:0 auto;padding:52px 22px 64px}.site-header{display:flex;align-items:center;gap:13px;margin-bottom:12px}.brand-logo{display:block;width:48px;height:48px;flex:none;object-fit:contain}.brand{font-size:12px;letter-spacing:.18em;font-weight:700;color:#fff}.product{color:var(--accent)}
     h1{font-size:34px;line-height:1.1;margin:10px 0 12px;font-weight:600}.lead{font-size:17px;line-height:1.6;color:var(--muted);margin:0 0 28px}
     .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:14px 0}.step{display:flex;gap:14px;align-items:flex-start}.n{min-width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#21170e;color:var(--accent);font-weight:700}.step h2{font-size:16px;margin:2px 0 5px}.step p{margin:0;color:var(--muted);line-height:1.5}
     .download{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:54px;margin-top:18px;border-radius:13px;background:var(--accent);color:#08090a;text-decoration:none;font-weight:750;border:0;cursor:pointer}.download[aria-disabled="true"]{background:#24262b;color:#888a90;cursor:not-allowed}
@@ -17,7 +17,7 @@
 </head>
 <body>
 <main>
-  <div class="brand">GOSSMERE <span class="product">ZEUKTER</span></div>
+  <header class="site-header"><img class="brand-logo" src="./zeukter-logo.png" width="48" height="48" alt=""><div class="brand">GOSSMERE <span class="product">ZEUKTER</span></div></header>
   <h1>Collega il tuo PC una volta.</h1>
   <p class="lead">Zeukter Companion è il componente Windows che permette al telefono di riconoscere e controllare in modo sicuro il tuo PC. Si installa una volta sola; poi parte con Windows e le riconnessioni normali sono automatiche.</p>
 
