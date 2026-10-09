@@ -122,7 +122,16 @@ footer { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center
 .language-select:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .language-select:hover { border-color: var(--cyan); }
 .language-select option { color: var(--text); background: #05090b; }
+/* Retain the primary navigation on tablet and phone, with wrapping instead of hidden links. */
 @media (max-width: 900px) {
-  nav a:not(.lang-switch) { display: none; }
-  .language-select { max-width: 130px; }
+  .site-header { flex-wrap: wrap; row-gap: .85rem; }
+  .site-header nav { flex-wrap: wrap; justify-content: flex-start; width: 100%; gap: .45rem 1rem; }
+  .site-header nav a { display: inline-flex; white-space: nowrap; }
+  .language-menu { margin-left: auto; }
+  .language-select { max-width: 145px; }
+}
+@media (max-width: 480px) {
+  .site-header nav { gap: .5rem .8rem; }
+  .site-header nav a { font-size: .78rem; }
+  .language-menu { margin-left: 0; }
 }
