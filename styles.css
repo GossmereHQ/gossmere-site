@@ -114,3 +114,15 @@ footer { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center
   .product-row { grid-template-columns: 1fr; }
   .service-list > div { grid-template-columns: 1fr; gap: .45rem; }
 }
+
+/* Accessible compact multi-language menu: neutral chrome, no extra hosting or runtime service. */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.language-menu { position: relative; display: inline-flex; align-items: center; }
+.language-select { max-width: 150px; min-height: 42px; border: 1px solid var(--line-strong); border-radius: 999px; padding: .5rem 1.75rem .5rem .8rem; color: var(--text); background: #05090b; font: 600 .85rem "Manrope", sans-serif; cursor: pointer; }
+.language-select:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.language-select:hover { border-color: var(--cyan); }
+.language-select option { color: var(--text); background: #05090b; }
+@media (max-width: 900px) {
+  nav a:not(.lang-switch) { display: none; }
+  .language-select { max-width: 130px; }
+}
