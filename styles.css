@@ -94,7 +94,11 @@ footer { display: grid; grid-template-columns: 1fr 1fr auto; align-items: center
 .footer-logo { width: 34px; height: 34px; object-fit: contain; border-radius: 0; mix-blend-mode: screen; }
 @media (max-width: 900px) {
   nav { display: flex; }
-  nav a:not(.lang-switch) { display: none; }
+  nav { flex-wrap: wrap; justify-content: flex-start; gap: .45rem 1rem; }
+  nav a { display: inline-flex; white-space: nowrap; }
+  .site-header { flex-wrap: wrap; row-gap: .8rem; }
+  .site-header nav { width: 100%; }
+  .language-menu { margin-left: auto; }
   .hero { min-height: auto; padding-top: 4.2rem; }
   h1 { font-size: clamp(2.65rem, 10.5vw, 4.8rem); }
   .statement { grid-template-columns: 1fr; gap: 1.1rem; }
