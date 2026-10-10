@@ -1,0 +1,59 @@
+name: Validate static site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Block private files and internal business tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, re, sys
+          names = [
+              re.compile(r"checkpoint", re.I),
+              re.compile(r"restore[_-]?point", re.I),
+              re.compile(r"metodo[_-]?erika", re.I),
+              re.compile(r"method[_-]?erika", re.I),
+              re.compile(r"(^|/)\.env($|\.)", re.I),
+              re.compile(r"(^|/)(private|internal|secrets?)(/|$)", re.I),
+          ]
+          forbidden_exact = {"studio-commerciale.html", "invoice.html", "commercial-core.js"}
+          offenders = []
+          for p in pathlib.Path(".").rglob("*"):
+              if not p.is_file() or ".git" in p.parts or "node_modules" in p.parts:
+                  continue
+              s = p.as_posix()
+              if s in forbidden_exact or any(rx.search(s) for rx in names):
+                  offenders.append(s)
+          if offenders:
+              print("BLOCKED: restricted paths must never be in public site.")
+              print("Restricted file count:", len(offenders))
+              sys.exit(1)
+          print("PASS: no restricted paths in site checkout")
+          PY
+      - name: Check canonical domain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(tr -d '\r\n' < CNAME)" = "gossmere.com"
+      - name: Check public site essentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f nutridataset.html
+          test -f sitemap.xml
+          test -f robots.txt
+          ! grep -Eqi 'studio-commerciale\.html|invoice\.html|commercial-core\.js' robots.txt

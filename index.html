@@ -1,124 +1,117 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gossmere — Sistemi digitali per imprese</title>
-  <meta name="description" content="Gossmere realizza siti, applicazioni, automazioni, analytics e sistemi digitali su misura per attività e imprese.">
+  <link rel="icon" type="image/webp" href="/assets/gossmere-logo.webp">
+  <title>Gossmere — Software, Data & Digital Systems</title>
+  <meta name="description" content="Gossmere develops software, data products and digital systems with an enterprise-grade approach to quality, control and continuity.">
   <link rel="canonical" href="https://gossmere.com/">
+  <link rel="alternate" hreflang="en" href="https://gossmere.com/">
+  <link rel="alternate" hreflang="it" href="https://gossmere.com/it.html">
+  <link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html">
+  <link rel="alternate" hreflang="de" href="https://gossmere.com/de.html">
+  <link rel="alternate" hreflang="es" href="https://gossmere.com/es.html">
+  <link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html">
+  <link rel="alternate" hreflang="x-default" href="https://gossmere.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header single-header">
     <a class="brand-lockup" href="#top" aria-label="Gossmere home">
-      <img src="assets/gossmere-symbol-temp.jpg" alt="" class="brand-symbol">
+      <img src="assets/gossmere-logo.webp" alt="" class="brand-symbol">
       <span>GOSSMERE</span>
     </a>
-    <nav aria-label="Navigazione principale">
-      <a href="#solutions">Soluzioni</a>
-      <a href="#services">Servizi</a>
-      <a href="#local">Calabria</a>
-      <a href="#products">Prodotti</a>
-      <a href="#contact">Contatti</a>
-      <a class="lang-switch" href="en.html" aria-label="View English version">🇬🇧 EN</a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#products">Capabilities</a>
+            <a href="#principles">Standards</a>
+            <a href="#contact">Contact</a>
     </nav>
+    <div class="header-controls">
+      <div class="language-menu"><label class="sr-only" for="locale-en">Language / Lingua</label><select id="locale-en" class="language-select" aria-label="Language / Lingua" onchange="location.href=this.value + location.hash"><option value="index.html" selected>English</option><option value="it.html">Italiano</option><option value="fr.html">Français</option><option value="de.html">Deutsch</option><option value="es.html">Español</option><option value="pt.html">Português</option></select></div>
+      <details class="mobile-menu">
+        <summary aria-label="Menu" title="Menu">☰</summary>
+        <nav class="mobile-menu-links" aria-label="Menu">
+          <a href="#products">Capabilities</a>
+          <a href="#principles">Standards</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </details>
+    </div>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-brand">
-        <img src="assets/gossmere-symbol-temp.jpg" alt="Gossmere" class="hero-logo">
-        <div class="hero-wordmark">GOSSMERE</div>
+    <section class="hero hero-enterprise">
+      <div class="hero-primary">
+        <p class="eyebrow">SOFTWARE · DATA · DIGITAL SYSTEMS</p>
+        <h1>Data products with a clear purpose.</h1>
+        <p class="lead-en">Built to integrate. Designed to be evaluated.</p>
+        <p class="lead-it">Nutrition data engineered for professional integration.</p>
+        <div class="actions"><a class="button primary" href="#products">Explore data products</a><a class="button secondary" href="#contact">Discuss an early evaluation</a></div>
       </div>
-      <p class="eyebrow">Software &amp; Digital Systems for Business</p>
-      <h1>Sistemi digitali progettati intorno al modo in cui lavora davvero la tua impresa.</h1>
-      <p class="lead-en">Siti, applicazioni, automazioni, analytics e sistemi digitali su misura per trasformare attenzione in azione e processi in risultati misurabili.</p>
-      <p class="lead-it">Websites, applications, automation, analytics and custom systems built around real business operations.</p>
-      <div class="actions">
-        <a class="button primary" href="mailto:gossmere@gmail.com?subject=Audit%20digitale%20Gossmere">Richiedi un audit digitale</a>
-        <a class="button secondary" href="#solutions">Scopri le soluzioni</a>
-      </div>
+      <aside class="hero-feature" aria-label="NutriDataset">
+        <p class="section-label">Featured data product</p>
+        <p class="feature-mark">01 / DATA</p>
+        <h2>NutriDataset</h2>
+        <p>Our first data product is approaching its professional release. Built for product teams that need traceable nutrition information and a clearer path to integration.</p>
+        <div class="feature-footer"><span>Early evaluation conversations</span><a href="nutridataset.html" class="text-link">Explore NutriDataset <span aria-hidden="true">↗</span></a></div>
+      </aside>
     </section>
 
     <section class="statement">
-      <p class="statement-kicker">Risultati prima. Continuità dopo.</p>
-      <p class="statement-copy">Uniamo software, dati, automazioni e progettazione di prodotto in un unico sistema coerente per l'impresa.</p>
-      <p class="statement-copy muted">Built for outcomes. Designed for continuity.</p>
+      <p class="statement-kicker">Built with intent.</p>
+      <p class="statement-copy">Products and systems conceived as durable assets: maintainable, verifiable and designed to improve over time.</p>
+      <p class="statement-copy muted">Technology with a clear operating standard.</p>
     </section>
 
-    <section id="solutions" class="section">
-      <p class="section-label">Solutions / Soluzioni</p>
-      <h2>Partiamo dal risultato. La tecnologia viene dopo.</h2>
-      <p class="section-intro">Start with the outcome. Choose the technology after.</p>
+    <section id="products" class="section intro-products"><p class="section-label">GOSSMERE / PRODUCTS</p><h2>Nutrition data engineered for professional integration.</h2><p class="section-intro">Our first data product is approaching its professional release. Built for product teams that need traceable nutrition information and a clearer path to integration.</p><a href="nutridataset.html" class="text-link">Explore NutriDataset ↗</a></section>
+
+    <section id="capabilities" class="section">
+      <p class="section-label">Capabilities</p>
+      <h2>One technology base. Multiple product lines.</h2>
+      <p class="section-intro">Gossmere works across software, data and digital systems without limiting the technology to a single product category.</p>
       <div class="grid">
-        <article><span class="card-no">01</span><h3>Prenotazioni &amp; Appuntamenti</h3><p>Disponibilità, richieste, agenda, reminder e follow-up per ridurre attrito, chiamate perse e no-show.</p></article>
-        <article><span class="card-no">02</span><h3>Preventivi &amp; Lead</h3><p>Richieste strutturate, foto, documenti, qualificazione del cliente e follow-up tracciabile.</p></article>
-        <article><span class="card-no">03</span><h3>Membership &amp; Clienti</h3><p>Prove, iscrizioni, rinnovi, scadenze e CRM leggero per attività ricorrenti.</p></article>
-        <article><span class="card-no">04</span><h3>Data &amp; Analytics</h3><p>Dashboard e analisi per capire quali servizi rendono, quali canali convertono e dove si perdono opportunità.</p></article>
-        <article><span class="card-no">05</span><h3>Automazioni</h3><p>Reminder, notifiche, integrazioni e flussi ripetitivi per ridurre lavoro manuale e dimenticanze.</p></article>
-        <article><span class="card-no">06</span><h3>Sistemi su misura</h3><p>Soluzioni dedicate quando un software generico non basta al processo reale.</p></article>
+        <article><span class="card-no">01</span><h3>Software Products</h3><p>Applications and digital tools engineered as complete products: reliable, maintainable and grounded in real usage.</p></article>
+        <article><span class="card-no">02</span><h3>Data Products</h3><p>Datasets and data infrastructure built around provenance, quality, maintenance, rights and enterprise use.</p></article>
+        <article><span class="card-no">03</span><h3>Digital Systems</h3><p>Purpose-built systems, integrations, automation and workflows shaped around concrete operational requirements.</p></article>
+        <article><span class="card-no">04</span><h3>Analytics</h3><p>Decision-support structures that turn operational data into information people can actually use.</p></article>
+        <article><span class="card-no">05</span><h3>Automation</h3><p>Controlled workflows and integrations designed to reduce repetitive work and operational friction.</p></article>
+        <article><span class="card-no">06</span><h3>Product Engineering</h3><p>Architecture, development, verification and iteration focused on product quality across the full lifecycle.</p></article>
       </div>
     </section>
 
-    <section id="services" class="section split-section">
+    <section id="principles" class="section split-section">
       <div>
-        <p class="section-label">What we build / Cosa realizziamo</p>
-        <h2>Un unico partner tra web, applicazioni, dati e automazione.</h2>
+        <p class="section-label">Operating Standard</p>
+        <h2>Quality is not something added at the end.</h2>
+        <p class="section-intro">It is part of how the product is designed, verified, documented and maintained.</p>
       </div>
       <div class="service-list">
-        <div><strong>Websites</strong><span>Siti professionali, mobile-first, multilingua e orientati alla conversione.</span></div>
-        <div><strong>Web Apps</strong><span>Booking, preventivi, portali cliente, strumenti operativi e piccoli sistemi gestionali.</span></div>
-        <div><strong>Applications</strong><span>Android, desktop e iOS quando serve un prodotto dedicato.</span></div>
-        <div><strong>Data &amp; Dashboards</strong><span>Reporting, analytics e supporto decisionale costruiti intorno a domande di business reali.</span></div>
-        <div><strong>Automation</strong><span>Integrazioni, reminder, follow-up e riduzione dei flussi manuali.</span></div>
-        <div><strong>Custom Systems</strong><span>Infrastruttura digitale adattata all'impresa, non il contrario.</span></div>
-      </div>
-    </section>
-
-    <section id="local" class="section local-panel">
-      <p class="section-label">Calabria / Local Business</p>
-      <h2>Standard digitali internazionali, applicati localmente.</h2>
-      <p class="section-intro">International-grade digital systems, applied locally.</p>
-      <div class="local-columns">
-        <p>Stiamo ampliando una selezione di collaborazioni locali sulla Riviera dei Cedri e in Calabria, con priorità alle attività dove un miglioramento digitale può produrre un ritorno commerciale o operativo chiaro.</p>
-        <p>Turismo, hospitality, professionisti, automotive, wellness, fitness, retail e servizi: analizziamo il percorso digitale reale e interveniamo dove esistono attriti, richieste perse, processi manuali o opportunità non misurate.</p>
-      </div>
-    </section>
-
-    <section id="products" class="section">
-      <p class="section-label">Gossmere Products</p>
-      <h2>I prodotti fanno parte dell'ecosistema. I sistemi cliente sono progettati con la stessa mentalità di prodotto.</h2>
-      <div class="product-row">
-        <article><h3>Gossmere Smoother</h3><p>Product line.</p></article>
-        <article><h3>Gossmere Zeukter</h3><p>Product line.</p></article>
-        <article><h3>Gossmere Deftrove</h3><p>Product line.</p></article>
-        <article><h3>Extract</h3><p>Nome commerciale in valutazione.</p></article>
+        <div><strong>Evidence</strong><span>Decisions and claims supported by verifiable facts.</span></div>
+        <div><strong>Control</strong><span>Access, rights and usage surfaces defined precisely.</span></div>
+        <div><strong>Continuity</strong><span>Products designed to evolve without losing consistency.</span></div>
+        <div><strong>Security</strong><span>Protection and exposure minimisation integrated into product choices.</span></div>
+        <div><strong>Clarity</strong><span>Explicit documentation, limitations and responsibilities.</span></div>
+        <div><strong>Scale</strong><span>Architecture and processes prepared to grow with real usage.</span></div>
       </div>
     </section>
 
     <section id="contact" class="section contact-panel">
-      <p class="section-label">Contact / Contatti</p>
-      <h2>Mostraci dove il processo diventa lento, manuale o difficile da misurare.</h2>
-      <p>Possiamo partire da un audit, da un singolo flusso o da un obiettivo commerciale concreto.</p>
+      <p class="section-label">Business Contact</p>
+      <h2>For products, data and systems where precision matters.</h2>
+      <p>Partnerships, licensing, enterprise enquiries and commercial collaborations.</p>
       <div class="actions">
-        <a class="button primary" href="mailto:gossmere@gmail.com?subject=Contatto%20Gossmere">gossmere@gmail.com</a>
-      </div>
-      <div class="founder-line">
-        <strong>Founder &amp; Digital Solutions Architect — Gossmere</strong>
-        <span>Fondatrice, sviluppatrice e progettista di soluzioni digitali.</span>
+        <a class="button primary" href="mailto:gossmere@gmail.com?subject=Gossmere%20Business%20Enquiry">gossmere@gmail.com</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-brand">
-      <img src="assets/gossmere-symbol-temp.jpg" alt="" class="footer-logo">
-      <span>GOSSMERE</span>
-    </div>
-    <span>Software &amp; Digital Systems for Business</span>
+    <div class="footer-brand"><span>GOSSMERE</span></div>
+    <span>Software · Data · Digital Systems</span>
     <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
   </footer>
 </body>

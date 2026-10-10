@@ -1,18 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://gossmere.com/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
   </url>
   <url>
-    <loc>https://gossmere.com/privacy.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://gossmere.com/it.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
   </url>
   <url>
-    <loc>https://gossmere.com/terms.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
+    <loc>https://gossmere.com/fr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
   </url>
+  <url>
+    <loc>https://gossmere.com/de.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/pt.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset-it.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset-fr.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset-de.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset-es.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url>
+    <loc>https://gossmere.com/nutridataset-pt.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gossmere.com/nutridataset.html"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://gossmere.com/nutridataset-it.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://gossmere.com/nutridataset-fr.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://gossmere.com/nutridataset-de.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://gossmere.com/nutridataset-es.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://gossmere.com/nutridataset-pt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gossmere.com/nutridataset.html"/>
+  </url>
+  <url><loc>https://gossmere.com/privacy.html</loc></url>
+  <url><loc>https://gossmere.com/terms.html</loc></url>
 </urlset>
