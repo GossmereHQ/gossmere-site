@@ -1,0 +1,38 @@
+name: Validate static site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: node --check commercial-core.js
+      - name: Check required commercial pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f studio-commerciale.html
+          test -f invoice.html
+          grep -q 'commercial-core.js' studio-commerciale.html
+          grep -q 'commercial-core.js' invoice.html
+          grep -q 'noindex,nofollow' studio-commerciale.html
+          grep -q 'noindex,nofollow' invoice.html
+      - name: Check canonical domain file
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(tr -d '\r\n' < CNAME)" = "gossmere.com"
