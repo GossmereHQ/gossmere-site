@@ -374,3 +374,18 @@ html { scroll-padding-top: 82px; }
   .nutri-product-proof, .nutri-business { padding:3rem 0; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important;transition:none!important; } }
+
+/* NutriDataset publicly reviewable scope — responsive professional prelaunch */
+.nutri-public-scope,.nutri-public-licence,.nutri-public-faq {border-top:1px solid var(--line);padding:clamp(2.5rem,5vw,4.6rem) 0;}
+.nutri-public-scope h2,.nutri-public-licence h2,.nutri-public-faq h2 {font-size:clamp(1.7rem,3vw,2.8rem);line-height:1.2;letter-spacing:-.035em;max-width:850px;}
+.nutri-spec-grid,.nutri-faq-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:2rem;}
+.nutri-spec,.nutri-faq-grid article {min-width:0;padding:clamp(1.25rem,2vw,1.9rem);border:1px solid var(--line);border-radius:16px;background:#050c10;}
+.nutri-spec h3,.nutri-faq-grid h3 {font-size:1.04rem;line-height:1.4;letter-spacing:-.01em;color:var(--text);margin:0 0 .7rem;}
+.nutri-spec p,.nutri-faq-grid p,.nutri-public-licence p {color:var(--muted);line-height:1.75;font-size:.92rem;}
+.nutri-spec .nutri-spec-key {font-weight:700;color:#b8eaf4;font-size:1.04rem;line-height:1.65;}
+.nutri-public-licence {max-width:900px;}
+.nutri-public-licence .text-link {display:inline-block;margin-top:1rem;}
+@media (max-width:760px) {
+ .nutri-spec-grid,.nutri-faq-grid {grid-template-columns:1fr;gap:.8rem;margin-top:1.35rem;}
+ .nutri-spec,.nutri-faq-grid article {padding:1.2rem;}
+}
