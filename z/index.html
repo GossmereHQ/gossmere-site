@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gossmere Zeukter Companion</title>
+  <meta name="description" content="Installa Gossmere Zeukter Companion su Windows una sola volta e collega in modo sicuro il PC all'app Zeukter.">
+  <style>
+    :root{color-scheme:dark;--bg:#08090a;--panel:#121316;--text:#f5f5f3;--muted:#9b9ca1;--accent:#ff8400;--line:#292b30}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{max-width:720px;margin:0 auto;padding:52px 22px 64px}.site-header{display:flex;align-items:center;gap:13px;margin-bottom:12px}.brand-logo{display:block;width:48px;height:48px;flex:none;object-fit:contain}.brand{font-size:12px;letter-spacing:.18em;font-weight:700;color:#fff}.product{color:var(--accent)}
+    h1{font-size:34px;line-height:1.1;margin:10px 0 12px;font-weight:600}.lead{font-size:17px;line-height:1.6;color:var(--muted);margin:0 0 28px}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;margin:14px 0}.step{display:flex;gap:14px;align-items:flex-start}.n{min-width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#21170e;color:var(--accent);font-weight:700}.step h2{font-size:16px;margin:2px 0 5px}.step p{margin:0;color:var(--muted);line-height:1.5}
+    .download{display:inline-flex;align-items:center;justify-content:center;width:100%;min-height:54px;margin-top:18px;border-radius:13px;background:var(--accent);color:#08090a;text-decoration:none;font-weight:750;border:0;cursor:pointer}.download[aria-disabled="true"]{background:#24262b;color:#888a90;cursor:not-allowed}
+    .status{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.45}.hash{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere;color:#b7b8bc}.small{margin-top:26px;color:#777980;font-size:12px;line-height:1.5}
+  </style>
+</head>
+<body>
+<main>
+  <header class="site-header"><img class="brand-logo" src="./zeukter-logo.png" width="48" height="48" alt=""><div class="brand">GOSSMERE <span class="product">ZEUKTER</span></div></header>
+  <h1>Collega il tuo PC una volta.</h1>
+  <p class="lead">Zeukter Companion è il componente Windows che permette al telefono di riconoscere e controllare in modo sicuro il tuo PC. Si installa una volta sola; poi parte con Windows e le riconnessioni normali sono automatiche.</p>
+
+  <div class="card step"><div class="n">1</div><div><h2>Installa il Companion su Windows</h2><p>Scarica il pacchetto ufficiale da questa pagina e completa l'installazione. Non servono Java, Gradle, IP o porte manuali.</p></div></div>
+  <div class="card step"><div class="n">2</div><div><h2>Aprilo la prima volta</h2><p>Il Companion mostra la procedura di collegamento. Se Windows chiede un consenso di sicurezza, Zeukter spiega esattamente cosa sta autorizzando.</p></div></div>
+  <div class="card step"><div class="n">3</div><div><h2>Torna all'app Zeukter</h2><p>Completa la verifica iniziale. Da quel momento il PC mantiene la propria identità e Zeukter prova a riconnettersi automaticamente anche dopo riavvii e normali cambi di rete.</p></div></div>
+
+  <a id="download" class="download" href="#" aria-disabled="true">DOWNLOAD COMPANION</a>
+  <p id="status" class="status">Controllo disponibilità del pacchetto…</p>
+  <p id="hash" class="status hash" hidden></p>
+
+  <p class="small">Il collegamento iniziale non rende il PC accessibile pubblicamente: l'autorizzazione resta legata all'identità crittografica dei dispositivi. In caso di reset, revoca o nuovo PC sarà necessario effettuare di nuovo il bootstrap.</p>
+</main>
+<script>
+(async()=>{
+  const button=document.getElementById('download');
+  const status=document.getElementById('status');
+  const hash=document.getElementById('hash');
+  try{
+    const r=await fetch('./companion.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('manifest');
+    const m=await r.json();
+    if(m.available && /^https:\/\//i.test(m.download_url||'')){
+      button.href=m.download_url;
+      button.removeAttribute('aria-disabled');
+      button.textContent='SCARICA ZEUKTER COMPANION · '+(m.version||'Windows');
+      status.textContent='Pacchetto Windows ufficiale disponibile.';
+      if(m.sha256){hash.hidden=false;hash.textContent='SHA-256: '+m.sha256;}
+    }else{
+      button.addEventListener('click',e=>e.preventDefault());
+      status.textContent=m.note||'Il pacchetto pubblico non è ancora disponibile.';
+    }
+  }catch(e){
+    button.addEventListener('click',ev=>ev.preventDefault());
+    status.textContent='Il download non è disponibile in questo momento. Riprova più tardi.';
+  }
+})();
+</script>
+</body>
+</html>
