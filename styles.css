@@ -389,3 +389,8 @@ html { scroll-padding-top: 82px; }
  .nutri-spec-grid,.nutri-faq-grid {grid-template-columns:1fr;gap:.8rem;margin-top:1.35rem;}
  .nutri-spec,.nutri-faq-grid article {padding:1.2rem;}
 }
+
+/* Transparent G emblem: no multiply/screen black-background masking */
+.brand-symbol {width:44px;height:44px;object-fit:contain;mix-blend-mode:normal!important;filter:none!important;}
+.site-header.single-header .brand-symbol {width:44px;height:44px;object-fit:contain;mix-blend-mode:normal!important;filter:none!important;}
+@media(max-width:720px){.site-header.single-header .brand-symbol{width:38px;height:38px;}}
