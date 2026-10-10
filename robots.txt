@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /studio-commerciale.html
+Disallow: /invoice.html
+Disallow: /commercial-core.js
 
 Sitemap: https://gossmere.com/sitemap.xml
