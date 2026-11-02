@@ -36,6 +36,7 @@
     });
   }
   if (!form || !status || !service) return;
+  document.documentElement.classList.add("sv-js-enabled");
   form.addEventListener("submit", event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
