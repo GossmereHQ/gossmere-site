@@ -7,4 +7,4 @@
 @media (prefers-reduced-motion:reduce){.sv-card{transition:none}}
 
 /* Functional contact fallback without inline CSS; honored by strict CSP. */
-.sv-contact noscript + .sv-form{display:none}
+html:not(.sv-js-enabled) .sv-contact .sv-form{display:none}
