@@ -57,3 +57,7 @@ jobs:
           test -f sitemap.xml
           test -f robots.txt
           ! grep -Eqi 'studio-commerciale\.html|invoice\.html|commercial-core\.js' robots.txt
+
+      - name: Validate multilingual SEO and contact sources
+        shell: bash
+        run: python3 scripts/check_site_release.py
