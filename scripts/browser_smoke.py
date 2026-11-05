@@ -48,6 +48,17 @@ def run():
                         shot_dir = ROOT / "qa-screenshots"
                         shot_dir.mkdir(exist_ok=True)
                         page.screenshot(path=str(shot_dir / (device + ("-home" if route == "/" else "-services") + ".png")), full_page=True)
+                    header = page.locator(".site-header.single-header")
+                    if header.count():
+                        rect = header.bounding_box()
+                        if rect and rect["height"] > (76 if device == "mobile" else 92):
+                            problems.append(f"{device} {route}: header enlarged to {rect['height']:.0f}px")
+                    if route in ("/servizi/", "/services/", "/services/fr/", "/services/de/", "/services/es/", "/services/pt/"):
+                        headline = page.locator("h1").inner_text().lower()
+                        if "websites, seo" in headline or headline.startswith("siti web"):
+                            problems.append(f"{device} {route}: generic web-design-first heading")
+                        if not page.locator("#offer .sv-card").first.inner_text().lower().find("web") == -1:
+                            problems.append(f"{device} {route}: web card still leads services")
                     if page.locator("h1").count() != 1:
                         problems.append(f"{device} {route}: expected exactly one H1")
                     overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
