@@ -71,6 +71,8 @@ def run():
                     overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
                     if overflow > 2:
                         problems.append(f"{device} {route}: horizontal overflow {overflow}px")
+                        offenders = page.evaluate("""() => [...document.querySelectorAll('body *')].filter(el => el.getBoundingClientRect().right > innerWidth + 2).slice(0, 5).map(el => el.tagName + '.' + el.className + ':' + el.textContent.trim().slice(0, 40))""")
+                        print(f"OVERFLOW DETAIL {device} {route}: {offenders}")
                     if not page.locator(".brand-lockup").count():
                         problems.append(f"{device} {route}: missing brand")
                     if route in ("/", "/en/", "/fr.html", "/de.html", "/es.html", "/pt.html"):
