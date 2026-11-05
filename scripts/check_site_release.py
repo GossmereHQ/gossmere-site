@@ -99,7 +99,7 @@ else: problems.append("missing sitemap.xml")
 import json
 for lang, path in HOMES.items():
     source = (ROOT / path).read_text(encoding="utf-8")
-    blocks = re.findall(r'<script type="application/ld\\+json">([\\s\\S]*?)</script>', source)
+    blocks = re.findall(r'<script type="application/ld\+json">([\s\S]*?)</script>', source)
     parsed = []
     for block in blocks:
         try:
