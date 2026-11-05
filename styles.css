@@ -396,3 +396,20 @@ html { scroll-padding-top: 82px; }
 .brand-symbol {width:44px;height:44px;object-fit:contain;mix-blend-mode:normal!important;filter:none!important;}
 .site-header.single-header .brand-symbol {width:44px;height:44px;object-fit:contain;mix-blend-mode:normal!important;filter:none!important;}
 @media(max-width:720px){.site-header.single-header .brand-symbol{width:38px;height:38px;}}
+
+
+/* Corporate wordmark: more prominent on the same single-line header, without extra height. */
+.site-header.single-header .brand-lockup {
+  font-size: 1.24rem;
+  letter-spacing: .105em;
+  line-height: 1;
+}
+@media (max-width: 1200px) {
+  .site-header.single-header .brand-lockup { font-size: 1.08rem; letter-spacing: .07em; }
+}
+@media (max-width: 720px) {
+  .site-header.single-header .brand-lockup { font-size: 1.03rem; letter-spacing: .045em; }
+}
+@media (max-width: 365px) {
+  .site-header.single-header .brand-lockup { font-size: .9rem; letter-spacing: .015em; }
+}

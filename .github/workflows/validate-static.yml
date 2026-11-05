@@ -57,3 +57,24 @@ jobs:
           test -f sitemap.xml
           test -f robots.txt
           ! grep -Eqi 'studio-commerciale\.html|invoice\.html|commercial-core\.js' robots.txt
+
+      - name: Validate multilingual SEO and contact sources
+        shell: bash
+        run: python3 scripts/check_site_release.py
+
+      - name: Install browser QA prerequisites
+        shell: bash
+        run: |
+          python3 -m pip install --user playwright==1.56.0
+      - name: Browser QA desktop and mobile
+        shell: bash
+        run: python3 scripts/browser_smoke.py
+
+      - name: Save visual review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gossmere-site-visual-qa
+          path: qa-screenshots/*.png
+          if-no-files-found: ignore
+          retention-days: 7
