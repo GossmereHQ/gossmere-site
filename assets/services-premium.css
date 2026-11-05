@@ -8,3 +8,8 @@
 
 /* Functional contact fallback without inline CSS; honored by strict CSP. */
 html:not(.sv-js-enabled) .sv-contact .sv-form{display:none}
+
+/* Keep long translated technical terms inside narrow mobile viewports. */
+@media (max-width: 365px) {
+  .sv-wrap, .sv-wrap h1, .sv-wrap h2, .sv-wrap h3, .sv-wrap p, .sv-wrap label { overflow-wrap: anywhere; }
+}

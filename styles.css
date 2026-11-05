@@ -413,3 +413,17 @@ html { scroll-padding-top: 82px; }
 @media (max-width: 365px) {
   .site-header.single-header .brand-lockup { font-size: .9rem; letter-spacing: .015em; }
 }
+
+/* Mobile wordmark: override the older .brand-lockup span {font-size:.8rem}.
+   Target only the lettering; preserve the existing header/logo dimensions. */
+@media (max-width: 720px) {
+  .site-header.single-header .brand-lockup span {
+    font-size: 1.18rem;
+    line-height: 1;
+  }
+}
+@media (max-width: 365px) {
+  .site-header.single-header .brand-lockup span {
+    font-size: 1.02rem;
+  }
+}
