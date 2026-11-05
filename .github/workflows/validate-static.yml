@@ -61,3 +61,12 @@ jobs:
       - name: Validate multilingual SEO and contact sources
         shell: bash
         run: python3 scripts/check_site_release.py
+
+      - name: Install browser QA prerequisites
+        shell: bash
+        run: |
+          python3 -m pip install --user playwright==1.56.0
+          python3 -m playwright install --with-deps chromium
+      - name: Browser QA desktop and mobile
+        shell: bash
+        run: python3 scripts/browser_smoke.py
