@@ -95,6 +95,28 @@ if sitemap.exists():
     except ET.ParseError as ex: problems.append(f"invalid sitemap XML: {ex}")
 else: problems.append("missing sitemap.xml")
 
+# Protect the exact site identity against future SEO regressions.
+import json
+for lang, path in HOMES.items():
+    source = (ROOT / path).read_text(encoding="utf-8")
+    blocks = re.findall(r'<script type="application/ld\\+json">([\\s\\S]*?)</script>', source)
+    parsed = []
+    for block in blocks:
+        try:
+            parsed.append(json.loads(block))
+        except json.JSONDecodeError:
+            problems.append(f"{path}: invalid JSON-LD")
+    site_nodes = [obj for obj in parsed if isinstance(obj, dict) and obj.get("@type") == "WebSite"]
+    check(len(site_nodes) == 1, f"{path}: expected one WebSite JSON-LD node")
+    if site_nodes:
+        node = site_nodes[0]
+        check(node.get("name") == "Gossmere", f"{path}: incorrect site name")
+        check(node.get("alternateName") == "gossmere.com", f"{path}: missing domain fallback")
+        check(node.get("url") == "https://gossmere.com/", f"{path}: incorrect domain URL")
+    check('property="og:site_name" content="Gossmere"' in source, f"{path}: missing Open Graph brand")
+    check("Gossamer" not in source and "Gossamere" not in source,
+          f"{path}: other brand spelling in identity signals")
+
 if problems:
     for p in problems: print("FAIL:", p)
     sys.exit(1)
