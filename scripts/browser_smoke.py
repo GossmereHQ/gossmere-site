@@ -32,7 +32,7 @@ def run():
     problems = []
     pages_tested = 0
     with local_server() as base, sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
+        browser = playwright.chromium.launch(channel="chrome", headless=True)
         for device, viewport in VIEWPORTS:
             context = browser.new_context(viewport=viewport, device_scale_factor=1)
             for route in ROUTES:
