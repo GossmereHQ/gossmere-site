@@ -44,6 +44,10 @@ def run():
                     problems.append(f"{device} {route}: HTTP {response.status if response else 'no response'}")
                 else:
                     pages_tested += 1
+                    if route in ("/", "/servizi/"):
+                        shot_dir = ROOT / "qa-screenshots"
+                        shot_dir.mkdir(exist_ok=True)
+                        page.screenshot(path=str(shot_dir / (device + ("-home" if route == "/" else "-services") + ".png")), full_page=True)
                     if page.locator("h1").count() != 1:
                         problems.append(f"{device} {route}: expected exactly one H1")
                     overflow = page.evaluate("document.documentElement.scrollWidth - window.innerWidth")
