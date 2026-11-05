@@ -12,7 +12,8 @@ ROUTES = ["/", "/en/", "/fr.html", "/de.html", "/es.html", "/pt.html",
           "/servizi/", "/services/", "/services/fr/", "/services/de/",
           "/services/es/", "/services/pt/"]
 VIEWPORTS = [("desktop", {"width": 1366, "height": 768}),
-             ("mobile", {"width": 390, "height": 844})]
+             ("mobile", {"width": 390, "height": 844}),
+             ("mobile-small", {"width": 320, "height": 720})]
 
 @contextmanager
 def local_server():
@@ -48,10 +49,16 @@ def run():
                         shot_dir = ROOT / "qa-screenshots"
                         shot_dir.mkdir(exist_ok=True)
                         page.screenshot(path=str(shot_dir / (device + ("-home" if route == "/" else "-services") + ".png")), full_page=True)
+                    if device.startswith("mobile"):
+                        font_px = page.locator(".site-header.single-header .brand-lockup span").evaluate(
+                            "(el) => parseFloat(getComputedStyle(el).fontSize)")
+                        minimum = 16.0 if device == "mobile-small" else 18.5
+                        if font_px < minimum:
+                            problems.append(f"{device} {route}: wordmark font only {font_px:.2f}px")
                     header = page.locator(".site-header.single-header")
                     if header.count():
                         rect = header.bounding_box()
-                        if rect and rect["height"] > (76 if device == "mobile" else 92):
+                        if rect and rect["height"] > (76 if device.startswith("mobile") else 92):
                             problems.append(f"{device} {route}: header enlarged to {rect['height']:.0f}px")
                     if route in ("/servizi/", "/services/", "/services/fr/", "/services/de/", "/services/es/", "/services/pt/"):
                         headline = page.locator("h1").inner_text().lower()
@@ -95,7 +102,7 @@ def run():
         page.close()
         context.close()
         browser.close()
-    print(f"Browser QA: {pages_tested}/24 responsive page loads checked; {len(problems)} errors")
+    print(f"Browser QA: {pages_tested}/36 responsive page loads checked; {len(problems)} errors")
     for problem in problems:
         print("FAIL:", problem)
     if problems:
