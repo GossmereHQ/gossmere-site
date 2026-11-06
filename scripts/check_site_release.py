@@ -113,6 +113,15 @@ for lang, path in HOMES.items():
         check(node.get("name") == "Gossmere", f"{path}: incorrect site name")
         check(node.get("alternateName") == "gossmere.com", f"{path}: missing domain fallback")
         check(node.get("url") == "https://gossmere.com/", f"{path}: incorrect domain URL")
+    org_nodes = [obj for obj in parsed if isinstance(obj, dict) and obj.get("@type") == "Organization"]
+    check(len(org_nodes) == 1, f"{path}: expected one Organization JSON-LD node")
+    if org_nodes:
+        org = org_nodes[0]
+        check(org.get("@id") == "https://gossmere.com/#organization", f"{path}: organization ID changed")
+        check("https://www.linkedin.com/company/gossmere/" in org.get("sameAs", []),
+              f"{path}: missing verified official LinkedIn sameAs")
+    check('href="https://www.linkedin.com/company/gossmere/"' in source,
+          f"{path}: missing visible official LinkedIn link")
     check('property="og:site_name" content="Gossmere"' in source, f"{path}: missing Open Graph brand")
     check("Gossamer" not in source and "Gossamere" not in source,
           f"{path}: other brand spelling in identity signals")
