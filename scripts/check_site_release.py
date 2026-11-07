@@ -46,6 +46,8 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
         check(p.is_file(), f"{family}/{lang}: missing {path}")
         if not p.is_file(): continue
         s = p.read_text(encoding="utf-8")
+        check(not re.search(r">\s*(?:undefined|null)\s*<", s, re.I),
+              f"{path}: unresolved visible placeholder")
         d = Document()
         d.feed(s)
         docs[lang] = d
