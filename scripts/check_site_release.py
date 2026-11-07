@@ -60,6 +60,13 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
         if family == "services":
             check({"sv-form", "sv-status", "sv-name", "sv-email", "sv-message"}.issubset(d.ids),
                   f"{path}: missing contact controls")
+            check(bool(re.search(r'<form\b[^>]*\bid="sv-form"[^>]*\bmethod="dialog"', s)),
+                  f"{path}: unexpected contact form submit method")
+            check(all(re.search(r'\bname="' + field + r'"', s) for field in
+                      ("name", "company", "email", "phone", "service", "message")),
+                  f"{path}: missing expected enquiry field")
+            check('type="email"' in s and "aria-live=\"polite\"" in s,
+                  f"{path}: missing email validation or accessible status")
             check(d.noscript > 0 and "mailto:gossmere@gmail.com" in s,
                   f"{path}: missing fallback")
             check("<noscript><style>" not in s, f"{path}: CSP-incompatible inline fallback")
