@@ -135,6 +135,35 @@ for lang, path in HOMES.items():
     check("Gossamer" not in source and "Gossamere" not in source,
           f"{path}: other brand spelling in identity signals")
 
+# Mirror the public CI's preflight in this locally runnable source gate.
+# This protects releases even when GitHub-hosted CI cannot be used.
+for essential in ("index.html", "nutridataset.html", "sitemap.xml", "robots.txt"):
+    check((ROOT / essential).is_file(), f"missing public release essential: {essential}")
+cname = ROOT / "CNAME"
+check(cname.is_file() and cname.read_text(encoding="utf-8").strip() == "gossmere.com",
+      "CNAME must be exactly gossmere.com")
+forbidden_paths = (
+    re.compile(r"checkpoint", re.I),
+    re.compile(r"restore[_-]?point", re.I),
+    re.compile(r"metodo[_-]?erika", re.I),
+    re.compile(r"method[_-]?erika", re.I),
+    re.compile(r"(^|/)\\.env($|\\.)", re.I),
+    re.compile(r"(^|/)(private|internal|secrets?)(/|$)", re.I),
+)
+forbidden_exact = {"studio-commerciale.html", "invoice.html", "commercial-core.js"}
+for item in ROOT.rglob("*"):
+    if not item.is_file():
+        continue
+    relative = item.relative_to(ROOT)
+    if ".git" in relative.parts or "node_modules" in relative.parts:
+        continue
+    name = relative.as_posix()
+    if name in forbidden_exact or any(pattern.search(name) for pattern in forbidden_paths):
+        problems.append(f"restricted public path: {name}")
+robots_text = (ROOT / "robots.txt").read_text(encoding="utf-8") if (ROOT / "robots.txt").exists() else ""
+check(not re.search(r"studio-commerciale\\.html|invoice\\.html|commercial-core\\.js", robots_text, re.I),
+      "robots.txt exposes internal business asset names")
+
 if problems:
     for p in problems: print("FAIL:", p)
     sys.exit(1)
