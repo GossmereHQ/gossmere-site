@@ -147,7 +147,7 @@ forbidden_paths = (
     re.compile(r"restore[_-]?point", re.I),
     re.compile(r"metodo[_-]?erika", re.I),
     re.compile(r"method[_-]?erika", re.I),
-    re.compile(r"(^|/)\\.env($|\\.)", re.I),
+    re.compile(r"(^|/)\.env($|\.)", re.I),
     re.compile(r"(^|/)(private|internal|secrets?)(/|$)", re.I),
 )
 forbidden_exact = {"studio-commerciale.html", "invoice.html", "commercial-core.js"}
@@ -161,7 +161,7 @@ for item in ROOT.rglob("*"):
     if name in forbidden_exact or any(pattern.search(name) for pattern in forbidden_paths):
         problems.append(f"restricted public path: {name}")
 robots_text = (ROOT / "robots.txt").read_text(encoding="utf-8") if (ROOT / "robots.txt").exists() else ""
-check(not re.search(r"studio-commerciale\\.html|invoice\\.html|commercial-core\\.js", robots_text, re.I),
+check(not re.search(r"studio-commerciale\.html|invoice\.html|commercial-core\.js", robots_text, re.I),
       "robots.txt exposes internal business asset names")
 
 if problems:
