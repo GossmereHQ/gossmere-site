@@ -100,8 +100,42 @@ else:
 
 sitemap = ROOT / "sitemap.xml"
 if sitemap.exists():
-    try: ET.parse(sitemap)
-    except ET.ParseError as ex: problems.append(f"invalid sitemap XML: {ex}")
+    try:
+        tree = ET.parse(sitemap)
+        xml_ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+        xhtml_ns = "{http://www.w3.org/1999/xhtml}"
+        service_urls = {
+            "it": "https://gossmere.com/servizi/",
+            "en": "https://gossmere.com/services/",
+            "fr": "https://gossmere.com/services/fr/",
+            "de": "https://gossmere.com/services/de/",
+            "es": "https://gossmere.com/services/es/",
+            "pt": "https://gossmere.com/services/pt/",
+            "x-default": "https://gossmere.com/services/",
+        }
+        sitemap_records = {}
+        for entry in tree.getroot().findall(xml_ns + "url"):
+            loc = entry.findtext(xml_ns + "loc")
+            if loc:
+                sitemap_records.setdefault(loc, []).append(entry)
+        for locale, url in service_urls.items():
+            if locale == "x-default":
+                continue
+            entries = sitemap_records.get(url, [])
+            check(len(entries) == 1, f"sitemap service/{locale}: expected one URL")
+            if len(entries) != 1:
+                continue
+            links = entries[0].findall(xhtml_ns + "link")
+            actual = {}
+            for link in links:
+                if link.get("rel") == "alternate":
+                    code = link.get("hreflang")
+                    check(code not in actual, f"sitemap service/{locale}: duplicate hreflang {code}")
+                    actual[code] = link.get("href")
+            check(actual == service_urls,
+                  f"sitemap service/{locale}: incomplete or inconsistent hreflang cluster")
+    except ET.ParseError as ex:
+        problems.append(f"invalid sitemap XML: {ex}")
 else: problems.append("missing sitemap.xml")
 
 # Protect the exact site identity against future SEO regressions.
