@@ -163,7 +163,7 @@ if seo_landing.is_file():
           "SEO audit landing: missing or duplicate sitemap URL")
     check('href="/servizi/#contact"' in seo_source,
           "SEO audit landing: missing existing contact form route")
-    check(bool(re.search(r'<h1\\b', seo_source)), "SEO audit landing: missing H1")
+    check(bool(re.search(r'<h1\b', seo_source)), "SEO audit landing: missing H1")
 hub_source = (ROOT / "servizi/index.html").read_text(encoding="utf-8")
 check('href="/servizi/seo/"' in hub_source, "services hub: missing SEO audit landing link")
 
