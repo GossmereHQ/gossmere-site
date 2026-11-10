@@ -46,6 +46,8 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
         check(p.is_file(), f"{family}/{lang}: missing {path}")
         if not p.is_file(): continue
         s = p.read_text(encoding="utf-8")
+        check(not re.search(r">\s*(?:undefined|null)\s*<", s, re.I),
+              f"{path}: unresolved visible placeholder")
         d = Document()
         d.feed(s)
         docs[lang] = d
@@ -58,6 +60,13 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
         if family == "services":
             check({"sv-form", "sv-status", "sv-name", "sv-email", "sv-message"}.issubset(d.ids),
                   f"{path}: missing contact controls")
+            check(bool(re.search(r'<form\b[^>]*\bid="sv-form"[^>]*\bmethod="dialog"', s)),
+                  f"{path}: unexpected contact form submit method")
+            check(all(re.search(r'\bname="' + field + r'"', s) for field in
+                      ("name", "company", "email", "phone", "service", "message")),
+                  f"{path}: missing expected enquiry field")
+            check('type="email"' in s and "aria-live=\"polite\"" in s,
+                  f"{path}: missing email validation or accessible status")
             check(d.noscript > 0 and "mailto:gossmere@gmail.com" in s,
                   f"{path}: missing fallback")
             check("<noscript><style>" not in s, f"{path}: CSP-incompatible inline fallback")
@@ -91,9 +100,54 @@ else:
 
 sitemap = ROOT / "sitemap.xml"
 if sitemap.exists():
-    try: ET.parse(sitemap)
-    except ET.ParseError as ex: problems.append(f"invalid sitemap XML: {ex}")
+    try:
+        tree = ET.parse(sitemap)
+        xml_ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+        xhtml_ns = "{http://www.w3.org/1999/xhtml}"
+        service_urls = {
+            "it": "https://gossmere.com/servizi/",
+            "en": "https://gossmere.com/services/",
+            "fr": "https://gossmere.com/services/fr/",
+            "de": "https://gossmere.com/services/de/",
+            "es": "https://gossmere.com/services/es/",
+            "pt": "https://gossmere.com/services/pt/",
+            "x-default": "https://gossmere.com/services/",
+        }
+        sitemap_records = {}
+        for entry in tree.getroot().findall(xml_ns + "url"):
+            loc = entry.findtext(xml_ns + "loc")
+            if loc:
+                sitemap_records.setdefault(loc, []).append(entry)
+        for locale, url in service_urls.items():
+            if locale == "x-default":
+                continue
+            entries = sitemap_records.get(url, [])
+            check(len(entries) == 1, f"sitemap service/{locale}: expected one URL")
+            if len(entries) != 1:
+                continue
+            links = entries[0].findall(xhtml_ns + "link")
+            actual = {}
+            for link in links:
+                if link.get("rel") == "alternate":
+                    code = link.get("hreflang")
+                    check(code not in actual, f"sitemap service/{locale}: duplicate hreflang {code}")
+                    actual[code] = link.get("href")
+            check(actual == service_urls,
+                  f"sitemap service/{locale}: incomplete or inconsistent hreflang cluster")
+    except ET.ParseError as ex:
+        problems.append(f"invalid sitemap XML: {ex}")
 else: problems.append("missing sitemap.xml")
+
+# Legal pages belong to the public sitemap and must advertise their own canonicals.
+for legal in ("privacy.html", "terms.html"):
+    source = (ROOT / legal).read_text(encoding="utf-8")
+    expected = f"https://gossmere.com/{legal}"
+    parser = Document()
+    parser.feed(source)
+    check(parser.canonical == [expected], f"{legal}: missing or incorrect canonical")
+    if sitemap.exists() and "sitemap_records" in locals():
+        check(len(sitemap_records.get(expected, [])) == 1,
+              f"{legal}: missing or duplicate sitemap URL")
 
 # Protect the exact site identity against future SEO regressions.
 import json
@@ -125,6 +179,35 @@ for lang, path in HOMES.items():
     check('property="og:site_name" content="Gossmere"' in source, f"{path}: missing Open Graph brand")
     check("Gossamer" not in source and "Gossamere" not in source,
           f"{path}: other brand spelling in identity signals")
+
+# Mirror the public CI's preflight in this locally runnable source gate.
+# This protects releases even when GitHub-hosted CI cannot be used.
+for essential in ("index.html", "nutridataset.html", "sitemap.xml", "robots.txt"):
+    check((ROOT / essential).is_file(), f"missing public release essential: {essential}")
+cname = ROOT / "CNAME"
+check(cname.is_file() and cname.read_text(encoding="utf-8").strip() == "gossmere.com",
+      "CNAME must be exactly gossmere.com")
+forbidden_paths = (
+    re.compile(r"checkpoint", re.I),
+    re.compile(r"restore[_-]?point", re.I),
+    re.compile(r"metodo[_-]?erika", re.I),
+    re.compile(r"method[_-]?erika", re.I),
+    re.compile(r"(^|/)\.env($|\.)", re.I),
+    re.compile(r"(^|/)(private|internal|secrets?)(/|$)", re.I),
+)
+forbidden_exact = {"studio-commerciale.html", "invoice.html", "commercial-core.js"}
+for item in ROOT.rglob("*"):
+    if not item.is_file():
+        continue
+    relative = item.relative_to(ROOT)
+    if ".git" in relative.parts or "node_modules" in relative.parts:
+        continue
+    name = relative.as_posix()
+    if name in forbidden_exact or any(pattern.search(name) for pattern in forbidden_paths):
+        problems.append(f"restricted public path: {name}")
+robots_text = (ROOT / "robots.txt").read_text(encoding="utf-8") if (ROOT / "robots.txt").exists() else ""
+check(not re.search(r"studio-commerciale\.html|invoice\.html|commercial-core\.js", robots_text, re.I),
+      "robots.txt exposes internal business asset names")
 
 if problems:
     for p in problems: print("FAIL:", p)
