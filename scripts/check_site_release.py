@@ -167,6 +167,25 @@ if seo_landing.is_file():
 hub_source = (ROOT / "servizi/index.html").read_text(encoding="utf-8")
 check('href="/servizi/seo/"' in hub_source, "services hub: missing SEO audit landing link")
 
+# Verify the dedicated Italian corporate website offer and its conversion path.
+web_landing = ROOT / "servizi/siti-web/index.html"
+check(web_landing.is_file(), "missing Italian corporate websites landing")
+if web_landing.is_file():
+    web_source = web_landing.read_text(encoding="utf-8")
+    web_doc = Document()
+    web_doc.feed(web_source)
+    web_url = "https://gossmere.com/servizi/siti-web/"
+    check(web_doc.language == "it", "websites landing: incorrect page language")
+    check(web_doc.canonical == [web_url], "websites landing: incorrect canonical")
+    check(len(sitemap_records.get(web_url, [])) == 1,
+          "websites landing: missing or duplicate sitemap URL")
+    check('href="/servizi/#contact"' in web_source,
+          "websites landing: missing existing contact form route")
+    check(bool(re.search(r'<h1\b', web_source)), "websites landing: missing H1")
+    check('BreadcrumbList' in web_source, "websites landing: missing breadcrumbs")
+check('href="/servizi/siti-web/"' in hub_source,
+      "services hub: missing corporate websites landing link")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
