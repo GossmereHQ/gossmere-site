@@ -149,6 +149,24 @@ for legal in ("privacy.html", "terms.html"):
         check(len(sitemap_records.get(expected, [])) == 1,
               f"{legal}: missing or duplicate sitemap URL")
 
+# Verify the dedicated Italian SEO offer has one indexable URL and a clear route to contact.
+seo_landing = ROOT / "servizi/seo/index.html"
+check(seo_landing.is_file(), "missing Italian SEO audit landing")
+if seo_landing.is_file():
+    seo_source = seo_landing.read_text(encoding="utf-8")
+    seo_doc = Document()
+    seo_doc.feed(seo_source)
+    seo_url = "https://gossmere.com/servizi/seo/"
+    check(seo_doc.language == "it", "SEO audit landing: incorrect page language")
+    check(seo_doc.canonical == [seo_url], "SEO audit landing: incorrect canonical")
+    check(len(sitemap_records.get(seo_url, [])) == 1,
+          "SEO audit landing: missing or duplicate sitemap URL")
+    check('href="/servizi/#contact"' in seo_source,
+          "SEO audit landing: missing existing contact form route")
+    check(bool(re.search(r'<h1\\b', seo_source)), "SEO audit landing: missing H1")
+hub_source = (ROOT / "servizi/index.html").read_text(encoding="utf-8")
+check('href="/servizi/seo/"' in hub_source, "services hub: missing SEO audit landing link")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
