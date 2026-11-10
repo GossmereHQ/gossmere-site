@@ -138,6 +138,17 @@ if sitemap.exists():
         problems.append(f"invalid sitemap XML: {ex}")
 else: problems.append("missing sitemap.xml")
 
+# Legal pages belong to the public sitemap and must advertise their own canonicals.
+for legal in ("privacy.html", "terms.html"):
+    source = (ROOT / legal).read_text(encoding="utf-8")
+    expected = f"https://gossmere.com/{legal}"
+    parser = Document()
+    parser.feed(source)
+    check(parser.canonical == [expected], f"{legal}: missing or incorrect canonical")
+    if sitemap.exists() and "sitemap_records" in locals():
+        check(len(sitemap_records.get(expected, [])) == 1,
+              f"{legal}: missing or duplicate sitemap URL")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
