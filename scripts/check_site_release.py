@@ -212,7 +212,7 @@ for label, href in (
     ("SEO audit", "/servizi/seo/"),
     ("automations", "/servizi/automazioni/"),
 ):
-    check(bool(re.search(r'<a\\b[^>]*\\bhref="' + re.escape(href) + r'"', home_it_source)),
+    check(bool(re.search(r'<a\b[^>]*\bhref="' + re.escape(href) + r'"', home_it_source)),
           f"homepage: missing descriptive link to {label}")
 
 # Protect the exact site identity against future SEO regressions.
