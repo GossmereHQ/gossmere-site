@@ -205,6 +205,16 @@ if automation_landing.is_file():
 check('href="/servizi/automazioni/"' in hub_source,
       "services hub: missing automation landing link")
 
+# Ensure commercial landing pages are directly discoverable from the Italian homepage.
+home_it_source = (ROOT / "index.html").read_text(encoding="utf-8")
+for label, href in (
+    ("corporate websites", "/servizi/siti-web/"),
+    ("SEO audit", "/servizi/seo/"),
+    ("automations", "/servizi/automazioni/"),
+):
+    check(bool(re.search(r'<a\\b[^>]*\\bhref="' + re.escape(href) + r'"', home_it_source)),
+          f"homepage: missing descriptive link to {label}")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
