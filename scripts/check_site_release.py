@@ -186,6 +186,25 @@ if web_landing.is_file():
 check('href="/servizi/siti-web/"' in hub_source,
       "services hub: missing corporate websites landing link")
 
+# Verify the Italian automation offer, sitemap entry and contact route.
+automation_landing = ROOT / "servizi/automazioni/index.html"
+check(automation_landing.is_file(), "missing Italian automation landing")
+if automation_landing.is_file():
+    automation_source = automation_landing.read_text(encoding="utf-8")
+    automation_doc = Document()
+    automation_doc.feed(automation_source)
+    automation_url = "https://gossmere.com/servizi/automazioni/"
+    check(automation_doc.language == "it", "automation landing: incorrect language")
+    check(automation_doc.canonical == [automation_url], "automation landing: incorrect canonical")
+    check(len(sitemap_records.get(automation_url, [])) == 1,
+          "automation landing: missing or duplicate sitemap URL")
+    check('href="/servizi/#contact"' in automation_source,
+          "automation landing: missing contact route")
+    check(bool(re.search(r'<h1\b', automation_source)), "automation landing: missing H1")
+    check('BreadcrumbList' in automation_source, "automation landing: missing breadcrumb")
+check('href="/servizi/automazioni/"' in hub_source,
+      "services hub: missing automation landing link")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
