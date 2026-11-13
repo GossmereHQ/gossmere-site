@@ -321,7 +321,7 @@ html { scroll-padding-top: 82px; }
   max-width: none; min-height: 0;
   display: grid; grid-template-columns: minmax(0,1.2fr) minmax(300px,.8fr);
   gap: clamp(2rem,5vw,5rem); align-items: center;
-  padding: clamp(3.5rem,7vw,7.5rem) 0 clamp(3.4rem,7vw,6rem);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem) 0 clamp(3.4rem,7vw,6rem);
 }
 .hero-enterprise .hero-primary h1 {
   max-width: 810px; font-size: clamp(2.75rem,5.25vw,5.4rem);
@@ -367,7 +367,7 @@ html { scroll-padding-top: 82px; }
   .hero-feature { min-height:290px; }
 }
 @media (max-width: 720px) {
-  .hero-enterprise { padding:2.8rem 0 3rem; }
+  .hero-enterprise { padding:1.375rem 0 3rem; }
   .hero-enterprise .hero-primary h1 { font-size:clamp(2.55rem,9vw,4.3rem); }
   .hero-feature { min-height:270px; padding:1.5rem; }
   .value-cards { grid-template-columns:1fr; }
