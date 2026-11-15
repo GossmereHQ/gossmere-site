@@ -10,6 +10,24 @@
 <link rel="icon" type="image/svg+xml" href="/assets/gossmere-favicon-v2.svg">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/assets/services-premium.css">
+<style>
+/* Article-only layout: keep corporate service pages unchanged. */
+.article-layout .sv-top { padding: clamp(1.25rem, 2.5vw, 2rem) 0 2.5rem; }
+.article-layout .sv-top h1 {
+  max-width: 1050px;
+  font-size: clamp(2.2rem, 3.35vw, 3.2rem);
+  line-height: 1.13;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+@media (max-width: 720px) {
+  .article-layout .sv-top { padding: 1.2rem 0 2.1rem; }
+  .article-layout .sv-top h1 {
+    font-size: clamp(1.95rem, 7.4vw, 2.65rem);
+    line-height: 1.16;
+  }
+}
+</style>
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Gossmere">
 <meta property="og:title" content="Sito indicizzato ma senza visite: perché serve un audit SEO">
@@ -22,7 +40,7 @@
 <a class="brand-lockup" href="/" aria-label="Gossmere — homepage"><img class="brand-symbol" src="/assets/gossmere-logo-transparent-96.png" alt=""><span>GOSSMERE</span></a>
 <nav class="main-nav" aria-label="Navigazione principale"><a href="/">Home</a><a href="/servizi/">Servizi</a><a href="/servizi/seo/">Audit SEO</a><a href="/servizi/#contact">Contatti</a></nav>
 </header>
-<main class="sv-wrap">
+<main class="sv-wrap article-layout">
 <article>
 <section class="sv-top">
 <p class="section-label">GOSSMERE / APPROFONDIMENTI / SEO</p>
