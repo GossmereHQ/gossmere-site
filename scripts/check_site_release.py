@@ -215,6 +215,31 @@ for label, href in (
     check(bool(re.search(r'<a\b[^>]*\bhref="' + re.escape(href) + r'"', home_it_source)),
           f"homepage: missing descriptive link to {label}")
 
+# Verify the Italian Gossmere identity page as a single, factual, crawlable resource.
+identity_landing = ROOT / "chi-siamo/index.html"
+check(identity_landing.is_file(), "identity: missing Chi siamo page")
+if identity_landing.is_file():
+    identity_source = identity_landing.read_text(encoding="utf-8")
+    identity_doc = Document()
+    identity_doc.feed(identity_source)
+    identity_url = "https://gossmere.com/chi-siamo/"
+    check(identity_doc.language == "it", "identity: incorrect language")
+    check(identity_doc.canonical == [identity_url], "identity: incorrect canonical")
+    check(len(sitemap_records.get(identity_url, [])) == 1,
+          "identity: missing or duplicate sitemap URL")
+    check("Chi è Gossmere" in identity_source, "identity: missing factual heading")
+    check('href="/servizi/"' in identity_source and
+          'href="/servizi/#contact"' in identity_source,
+          "identity: missing services and contact routes")
+    check('https://www.linkedin.com/company/gossmere/' in identity_source,
+          "identity: missing official LinkedIn reference")
+    check('https://gossmere.com/#organization' in identity_source,
+          "identity: missing established Organization reference")
+check('href="/chi-siamo/"' in home_it_source,
+      "homepage: missing company identity link")
+check('href="/chi-siamo/"' in hub_source,
+      "services hub: missing company identity link")
+
 # Protect the exact site identity against future SEO regressions.
 import json
 for lang, path in HOMES.items():
