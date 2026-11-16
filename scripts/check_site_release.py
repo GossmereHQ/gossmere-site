@@ -237,6 +237,8 @@ if identity_landing.is_file():
           "identity: missing established Organization reference")
 check('href="/chi-siamo/"' in home_it_source,
       "homepage: missing company identity link")
+check('href="/chi-siamo/"' in hub_source,
+      "services hub: missing company identity link")
 
 # Protect the exact site identity against future SEO regressions.
 import json
