@@ -267,10 +267,10 @@ for lang, path in HOMES.items():
         check(org.get("@id") == "https://gossmere.com/#organization", f"{path}: organization ID changed")
         check("https://www.linkedin.com/company/gossmere/" in org.get("sameAs", []),
               f"{path}: missing verified official LinkedIn sameAs")
+        check("https://github.com/GossmereHQ" in org.get("sameAs", []),
+              f"{path}: missing official GitHub sameAs")
     check('href="https://www.linkedin.com/company/gossmere/"' in source,
           f"{path}: missing visible official LinkedIn link")
-    check("https://github.com/GossmereHQ" in org.get("sameAs", []),
-          f"{path}: missing official GitHub sameAs")
     check('href="https://github.com/GossmereHQ"' in source,
           f"{path}: missing visible official GitHub link")
     check('property="og:site_name" content="Gossmere"' in source, f"{path}: missing Open Graph brand")
