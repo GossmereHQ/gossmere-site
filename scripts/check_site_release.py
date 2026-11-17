@@ -233,6 +233,8 @@ if identity_landing.is_file():
           "identity: missing services and contact routes")
     check('https://www.linkedin.com/company/gossmere/' in identity_source,
           "identity: missing official LinkedIn reference")
+    check('https://github.com/GossmereHQ' in identity_source,
+          "identity: missing official GitHub reference")
     check('https://gossmere.com/#organization' in identity_source,
           "identity: missing established Organization reference")
 check('href="/chi-siamo/"' in home_it_source,
@@ -265,8 +267,12 @@ for lang, path in HOMES.items():
         check(org.get("@id") == "https://gossmere.com/#organization", f"{path}: organization ID changed")
         check("https://www.linkedin.com/company/gossmere/" in org.get("sameAs", []),
               f"{path}: missing verified official LinkedIn sameAs")
+        check("https://github.com/GossmereHQ" in org.get("sameAs", []),
+              f"{path}: missing official GitHub sameAs")
     check('href="https://www.linkedin.com/company/gossmere/"' in source,
           f"{path}: missing visible official LinkedIn link")
+    check('href="https://github.com/GossmereHQ"' in source,
+          f"{path}: missing visible official GitHub link")
     check('property="og:site_name" content="Gossmere"' in source, f"{path}: missing Open Graph brand")
     check("Gossamer" not in source and "Gossamere" not in source,
           f"{path}: other brand spelling in identity signals")
