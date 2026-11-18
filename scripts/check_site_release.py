@@ -69,7 +69,7 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
                   f"{path}: missing email validation or accessible status")
             contact_start = s.find('<section class="sv-section" id="contact">')
             contact_markup = s[contact_start:] if contact_start >= 0 else ""
-            intro = re.search(r'<p class="sv-intro">([\\s\\S]*?)</p>', contact_markup)
+            intro = re.search(r'<p class="sv-intro">([\s\S]*?)</p>', contact_markup)
             check(bool(intro and '<a href="mailto:gossmere@gmail.com">gossmere@gmail.com</a>' in intro.group(1)),
                   f"{path}: missing visible mailto link outside JS-controlled form")
             check(d.noscript > 0 and "mailto:gossmere@gmail.com" in s,
