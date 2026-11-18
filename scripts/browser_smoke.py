@@ -100,6 +100,28 @@ def run():
                         problems.append(f"{device} {route}: JS: {e}")
                 page.close()
             context.close()
+        # Contact must remain accessible when JavaScript is disabled:
+        # the JS-controlled form is hidden but a direct email link remains visible.
+        no_js_context = browser.new_context(
+            viewport={"width": 390, "height": 844},
+            java_script_enabled=False
+        )
+        for route in ("/servizi/", "/services/", "/services/fr/",
+                      "/services/de/", "/services/es/", "/services/pt/"):
+            page = no_js_context.new_page()
+            response = page.goto(base + route, wait_until="domcontentloaded")
+            if not response or response.status != 200:
+                problems.append(f"No-JS contact {route}: HTTP failure")
+            else:
+                email = page.locator(
+                    '.sv-contact > p.sv-intro a[href="mailto:gossmere@gmail.com"]'
+                )
+                if email.count() != 1 or not email.is_visible():
+                    problems.append(f"No-JS contact {route}: visible direct email missing")
+                if page.locator("#sv-form").is_visible():
+                    problems.append(f"No-JS contact {route}: unusable form still shown")
+            page.close()
+        no_js_context.close()
         # Run the contact journey without letting an email client launch or sending a message.
         context = browser.new_context(viewport={"width": 1366, "height": 768})
         page = context.new_page()
