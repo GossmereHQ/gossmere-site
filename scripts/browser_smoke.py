@@ -112,6 +112,24 @@ def run():
             page.wait_for_function("document.querySelector('#sv-status').textContent.trim().length > 0", timeout=3000)
         except Exception:
             problems.append("Italian contact form did not show honest mailto message")
+        # Service landing CTA links must preselect the matching service, with a safe fallback.
+        for route, expected_index in (
+            ("/servizi/seo/", 2),
+            ("/servizi/siti-web/", 0),
+            ("/servizi/automazioni/", 3),
+        ):
+            page.goto(base + route, wait_until="networkidle")
+            target = page.locator('a.sv-cta.primary[href*="?service="]').first.get_attribute("href")
+            if not target:
+                problems.append(f"{route}: no service-specific CTA link")
+                continue
+            page.goto(base + target, wait_until="networkidle")
+            selected = page.locator("#sv-service").evaluate("(el) => el.selectedIndex")
+            if selected != expected_index:
+                problems.append(f"{route}: contact service index {selected}, expected {expected_index}")
+        page.goto(base + "/servizi/?service=unknown#contact", wait_until="networkidle")
+        if page.locator("#sv-service").evaluate("(el) => el.selectedIndex") != 0:
+            problems.append("Unknown contact service parameter changes default option")
         page.close()
         context.close()
         browser.close()
