@@ -28,6 +28,16 @@
   };
   const safe = (key, max, multiline = false) => clean(form.elements.namedItem(key)?.value, max, multiline);
   const service = form?.elements.namedItem("service");
+  // Prefill only an approved service choice on the Italian contact page.
+  // No extra personal information is collected, stored, or transmitted.
+  if (service && window.location.pathname === "/servizi/") {
+    const requested = new URLSearchParams(window.location.search).get("service");
+    const optionIndex = { web: 0, seo: 2, automation: 3 };
+    if (Object.prototype.hasOwnProperty.call(optionIndex, requested) &&
+        service.options.length > optionIndex[requested]) {
+      service.selectedIndex = optionIndex[requested];
+    }
+  }
   const langSelect = document.getElementById("sv-language");
   if (langSelect) {
     langSelect.addEventListener("change", () => {

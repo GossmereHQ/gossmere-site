@@ -93,6 +93,10 @@ if css.exists() and js.exists():
     script = js.read_text(encoding="utf-8")
     check("html:not(.sv-js-enabled) .sv-contact .sv-form" in styles,
           "contact CSS missing JS readiness guard")
+    check('new URLSearchParams(window.location.search).get("service")' in script,
+          "contact JS missing bounded service preselection")
+    check('Object.prototype.hasOwnProperty.call(optionIndex, requested)' in script,
+          "contact JS missing allowlist guard")
     check('classList.add("sv-js-enabled")' in script,
           "contact JS missing readiness marker")
 else:
@@ -161,7 +165,7 @@ if seo_landing.is_file():
     check(seo_doc.canonical == [seo_url], "SEO audit landing: incorrect canonical")
     check(len(sitemap_records.get(seo_url, [])) == 1,
           "SEO audit landing: missing or duplicate sitemap URL")
-    check('href="/servizi/#contact"' in seo_source,
+    check('href="/servizi/?service=seo#contact"' in seo_source,
           "SEO audit landing: missing existing contact form route")
     check(bool(re.search(r'<h1\b', seo_source)), "SEO audit landing: missing H1")
 hub_source = (ROOT / "servizi/index.html").read_text(encoding="utf-8")
@@ -179,7 +183,7 @@ if web_landing.is_file():
     check(web_doc.canonical == [web_url], "websites landing: incorrect canonical")
     check(len(sitemap_records.get(web_url, [])) == 1,
           "websites landing: missing or duplicate sitemap URL")
-    check('href="/servizi/#contact"' in web_source,
+    check('href="/servizi/?service=web#contact"' in web_source,
           "websites landing: missing existing contact form route")
     check(bool(re.search(r'<h1\b', web_source)), "websites landing: missing H1")
     check('BreadcrumbList' in web_source, "websites landing: missing breadcrumbs")
@@ -198,7 +202,7 @@ if automation_landing.is_file():
     check(automation_doc.canonical == [automation_url], "automation landing: incorrect canonical")
     check(len(sitemap_records.get(automation_url, [])) == 1,
           "automation landing: missing or duplicate sitemap URL")
-    check('href="/servizi/#contact"' in automation_source,
+    check('href="/servizi/?service=automation#contact"' in automation_source,
           "automation landing: missing contact route")
     check(bool(re.search(r'<h1\b', automation_source)), "automation landing: missing H1")
     check('BreadcrumbList' in automation_source, "automation landing: missing breadcrumb")
