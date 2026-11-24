@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 ROUTES = ["/", "/en/", "/fr.html", "/de.html", "/es.html", "/pt.html",
           "/servizi/", "/services/", "/services/fr/", "/services/de/",
-          "/services/es/", "/services/pt/", "/chi-siamo/"]
+          "/services/es/", "/services/pt/", "/chi-siamo/", "/services/seo/"]
 VIEWPORTS = [("desktop", {"width": 1366, "height": 768}),
              ("mobile", {"width": 390, "height": 844}),
              ("mobile-small", {"width": 320, "height": 720})]
@@ -91,6 +91,13 @@ def run():
                             problems.append(f"{device} {route}: missing contact route")
                         if not page.locator('link[rel="canonical"][href="https://gossmere.com/chi-siamo/"]').count():
                             problems.append(f"{device} {route}: incorrect identity canonical")
+                    elif route == "/services/seo/":
+                        if not page.locator("#audit").count() or not page.locator("h1").count():
+                            problems.append(f"{device} {route}: SEO landing structure missing")
+                        if not page.locator('link[rel="canonical"][href="https://gossmere.com/services/seo/"]').count():
+                            problems.append(f"{device} {route}: SEO landing canonical missing")
+                        if not page.locator('a[href="/services/#contact"]').count():
+                            problems.append(f"{device} {route}: SEO conversion path missing")
                     else:
                         if not page.locator(".sv-creative").count():
                             problems.append(f"{device} {route}: creative services missing")
