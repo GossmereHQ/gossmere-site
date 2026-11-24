@@ -61,7 +61,7 @@
       "", "Message / Messaggio:", safe("message", 1200, true)
     ].join("\n");
     if (!safe("name", 120) || !safe("email", 254) || safe("message", 1200, true).length < 10) return;
-    const uri = "mailto:gossmere@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(details);
+    const uri = "mailto:info@gossmere.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(details);
     status.textContent = messages[locale] || messages.en;
     window.location.href = uri;
   });

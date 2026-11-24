@@ -114,7 +114,7 @@ def run():
                 problems.append(f"No-JS contact {route}: HTTP failure")
             else:
                 email = page.locator(
-                    '.sv-contact > p.sv-intro a[href="mailto:gossmere@gmail.com"]'
+                    '.sv-contact > p.sv-intro a[href="mailto:info@gossmere.com"]'
                 )
                 if email.count() != 1 or not email.is_visible():
                     problems.append(f"No-JS contact {route}: visible direct email missing")
