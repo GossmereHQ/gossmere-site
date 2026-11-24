@@ -70,9 +70,9 @@ for family, pages in [("home", HOMES), ("services", SERVICES)]:
             contact_start = s.find('<section class="sv-section" id="contact">')
             contact_markup = s[contact_start:] if contact_start >= 0 else ""
             intro = re.search(r'<p class="sv-intro">([\s\S]*?)</p>', contact_markup)
-            check(bool(intro and '<a href="mailto:gossmere@gmail.com">gossmere@gmail.com</a>' in intro.group(1)),
+            check(bool(intro and '<a href="mailto:info@gossmere.com">info@gossmere.com</a>' in intro.group(1)),
                   f"{path}: missing visible mailto link outside JS-controlled form")
-            check(d.noscript > 0 and "mailto:gossmere@gmail.com" in s,
+            check(d.noscript > 0 and "mailto:info@gossmere.com" in s,
                   f"{path}: missing fallback")
             check("<noscript><style>" not in s, f"{path}: CSP-incompatible inline fallback")
             check("/assets/services-contact.js" in s and "/assets/services-premium.css" in s,
@@ -173,6 +173,9 @@ if seo_landing.is_file():
     check('href="/servizi/?service=seo#contact"' in seo_source,
           "SEO audit landing: missing existing contact form route")
     check(bool(re.search(r'<h1\b', seo_source)), "SEO audit landing: missing H1")
+for geo_page in ("index.html", "chi-siamo/index.html", "servizi/index.html", "servizi/seo/index.html"):
+    geo_source = (ROOT / geo_page).read_text(encoding="utf-8")
+    check("Sangineto" in geo_source and "Belvedere Marittimo" in geo_source, f"{geo_page}: missing geographic context")
 hub_source = (ROOT / "servizi/index.html").read_text(encoding="utf-8")
 check('href="/servizi/seo/"' in hub_source, "services hub: missing SEO audit landing link")
 
