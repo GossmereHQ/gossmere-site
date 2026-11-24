@@ -158,6 +158,39 @@ for legal in ("privacy.html", "terms.html"):
         check(len(sitemap_records.get(expected, [])) == 1,
               f"{legal}: missing or duplicate sitemap URL")
 
+# Verify that the international English SEO page is indexable, discoverable and
+# reciprocally linked to its Italian counterpart without pretending local pages
+# represent all international markets.
+seo_it_url = "https://gossmere.com/servizi/seo/"
+seo_en_url = "https://gossmere.com/services/seo/"
+seo_expected_alts = {"it": seo_it_url, "en": seo_en_url, "x-default": seo_en_url}
+for seo_path, seo_url, language in (
+    ("servizi/seo/index.html", seo_it_url, "it"),
+    ("services/seo/index.html", seo_en_url, "en"),
+):
+    seo_file = ROOT / seo_path
+    check(seo_file.is_file(), f"{seo_path}: missing SEO service page")
+    if not seo_file.is_file():
+        continue
+    seo_html = seo_file.read_text(encoding="utf-8")
+    seo_parser = Document()
+    seo_parser.feed(seo_html)
+    check(seo_parser.language == language, f"{seo_path}: wrong language")
+    check(seo_parser.canonical == [seo_url], f"{seo_path}: wrong canonical")
+    check(seo_parser.alternates == seo_expected_alts, f"{seo_path}: incorrect SEO hreflang")
+    check(len(sitemap_records.get(seo_url, [])) == 1, f"{seo_path}: missing sitemap URL")
+    if len(sitemap_records.get(seo_url, [])) == 1:
+        mapped = {lnk.get("hreflang"): lnk.get("href") for lnk in sitemap_records[seo_url][0].findall("{http://www.w3.org/1999/xhtml}link")}
+        check(mapped == seo_expected_alts, f"{seo_path}: incorrect sitemap hreflang")
+    check('href="/services/#contact"' in seo_html if language == "en" else 'href="/servizi/?service=seo#contact"' in seo_html,
+          f"{seo_path}: missing contact conversion")
+check('href="/services/seo/"' in (ROOT / "services/index.html").read_text(encoding="utf-8"),
+      "English services hub: missing SEO consulting link")
+check("businesses in Italy and abroad" in (ROOT / "en/index.html").read_text(encoding="utf-8"),
+      "English homepage: international service positioning missing")
+check("imprese in Italia e all’estero" in (ROOT / "index.html").read_text(encoding="utf-8"),
+      "Italian homepage: international positioning missing")
+
 # Verify the dedicated Italian SEO offer has one indexable URL and a clear route to contact.
 seo_landing = ROOT / "servizi/seo/index.html"
 check(seo_landing.is_file(), "missing Italian SEO audit landing")
