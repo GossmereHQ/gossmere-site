@@ -427,3 +427,29 @@ html { scroll-padding-top: 82px; }
     font-size: 1.02rem;
   }
 }
+
+
+/* Explicit crawlable language navigation. Complements existing language selectors. */
+.footer-language-links {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1rem;
+  padding-top: .95rem;
+  border-top: 1px solid var(--line);
+}
+.footer-language-links .footer-language-label { color: var(--muted); font-weight: 600; }
+.footer-language-links a { color: var(--muted); text-decoration: none; }
+.footer-language-links a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .23em;
+}
+.footer-language-links a:hover { color: var(--cyan); }
+.footer-language-links a:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
